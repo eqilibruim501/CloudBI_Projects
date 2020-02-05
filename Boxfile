@@ -1,0 +1,25 @@
+web1:
+  php_version: 7.1.33
+  php_extensions:
+    - mbstring
+    - mcrypt
+    - pdo_mysql
+    - redis
+    - zip
+    - opcache
+  php_session_save_handler: redis
+  php_session_save_path: "tcp://tunnel.projects.eqilibruim.xyz:6379"
+  shared_writable_dirs:
+    - app/storage/cache
+    - app/storage/logs
+    - app/storage/meta
+    - app/storage/sessions
+    - app/storage/views
+    - app/config
+    - assets/uploads
+    - assets/images/profilepics
+  after_deploy:
+    - "php artisan cache:clear"
+    - "rm -f app/storage/views/*"
+cache1:
+  type: redis
